@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background: linear-gradient(to right, rgb(198, 198, 252), rgb(255, 189, 189));
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 40%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3vw 2vw;
+  border-radius: 30px;
+  box-shadow: 0px 10px 50px -20px rgb(0, 0, 0, 1);
+}
+
+.formstyling {
+  text-align: center;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: 1vw;
+  animation: popup 1s;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.headingstyling {
+  color: black;
+  margin-bottom: 2vw;
+}
+
+.inputstyling {
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  background: #eee;
+  padding: 1vw;
+  outline: none;
+}
+
+.buttonstyling {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.2vw;
+  color: white;
+  width: 100%;
+  border: none;
+  background: linear-gradient(to right, rgb(198, 198, 252), rgb(255, 189, 189));
+  border-radius: 30px;
+  padding: 0.8vw;
+  margin-top: 1vw;
+}
+
+.parastyling {
+  font-size: 1vw;
+}
+
+.linkstyling {
+  text-decoration: none;
+}
+
+.formstyling .displayheading {
+  color: #999999;
+  font-size: 1vw;
+}
+
+.displayName {
+  font-size: 2.5vw;
+}
+
+.active {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 50%;
+  }
+
+  .formstyling {
+    gap: 2vw;
+  }
+  .inputstyling {
+    padding: 1.5vw;
+  }
+
+  .buttonstyling {
+    font-size: 3vw;
+    margin-top: 2vw;
+  }
+
+  .parastyling {
+    font-size: 1.5vw;
+    margin-top: 1vw;
+  }
+
+  .formstyling .displayheading {
+    font-size: 2vw;
+  }
+  .displayName {
+    font-size: 4.5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10vw 5vw;
+    width: 80%;
+  }
+
+  .formstyling {
+    gap: 2vw;
+  }
+
+  .headingstyling {
+    font-size: 6vw;
+  }
+
+  .inputstyling {
+    font-size: 2vw;
+    padding: 2vw;
+  }
+
+  .buttonstyling {
+    font-size: 4vw;
+    margin-top: 2vw;
+  }
+
+  .parastyling {
+    font-size: 2.5vw;
+    margin-top: 1vw;
+  }
+  .formstyling .displayheading {
+    font-size: 2vw;
+  }
+  .displayName {
+    font-size: 6.5vw;
+  }
+}

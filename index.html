@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section id="signUp" class="formstyling">
+        <h1 class="headingstyling">Register</h1>
+        <input
+          class="inputstyling"
+          type="text"
+          id="userName"
+          placeholder="Your Name"
+        />
+        <input
+          class="inputstyling"
+          type="email"
+          id="userEmail"
+          placeholder="Your Email"
+        />
+        <input
+          class="inputstyling"
+          type="number"
+          id="userNumber"
+          placeholder="Your Number"
+        />
+        <input
+          class="inputstyling"
+          type="password"
+          id="userPassword"
+          placeholder="Password"
+        />
+        <button onclick="signUpInfo()" class="buttonstyling">SIGN UP</button>
+        <p class="parastyling">
+          Already have an account ?
+          <a onclick="forAnchorTagOflogin()" class="linkstyling" href="#"
+            >Login in</a
+          >
+        </p>
+      </section>
+
+      <section action="" id="loginForm" class="formstyling active">
+        <h1 class="headingstyling">Login</h1>
+        <input
+          class="inputstyling"
+          type="email"
+          id="loginEmail"
+          placeholder="Your Email"
+        />
+        <input
+          class="inputstyling"
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+        />
+        <button onclick="loginInfo()" class="buttonstyling">LOGIN</button>
+        <p class="parastyling">
+          Don't have an account ?
+          <a onclick="forAnchorTagOfRegister()" class="linkstyling" href="#"
+            >Resgister</a
+          >
+        </p>
+      </section>
+
+      <section id="homePage" class="formstyling">
+        <h1 class="displayheading">WELCOME TO YOUR HOME PAGE</h1>
+        <p class="displayName" id="displayName">OWAIS UR REHMAN</p>
+      </section>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
