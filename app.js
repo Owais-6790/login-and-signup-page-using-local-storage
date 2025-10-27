@@ -55,25 +55,28 @@ function loginInfo() {
   if (loginEmail.value == "" || loginPassword.value == "") {
     alert("Please fill the required details");
     matched = true;
-  }
-
-  if (loginEmail.value != "" || loginPassword.value != "") {
-    for (let i = 0; i < storedDate.length; i++) {
-      if (
-        loginEmail.value === storedDate[i].Email &&
-        loginPassword.value === storedDate[i].Password
-      ) {
-        loginForm.classList.remove("active");
-        homePageDisplay.classList.add("active");
-        displayName.innerText = storedDate[i].Name;
-        matched = true;
-        break;
+  } else {
+    if (storedDate == null) {
+      alert(`User doesn't exist`);
+    } else {
+      if (loginEmail.value != "" || loginPassword.value != "") {
+        for (let i = 0; i < storedDate.length; i++) {
+          if (
+            loginEmail.value === storedDate[i].Email &&
+            loginPassword.value === storedDate[i].Password
+          ) {
+            loginForm.classList.remove("active");
+            homePageDisplay.classList.add("active");
+            displayName.innerText = storedDate[i].Name;
+            matched = true;
+            break;
+          }
+        }
+      }
+      if (matched === false) {
+        alert(`User doesn't exist`);
       }
     }
-  }
-
-  if (matched === false) {
-    alert(`User doesn't exist`);
   }
 }
 
