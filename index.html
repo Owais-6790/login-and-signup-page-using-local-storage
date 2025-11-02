@@ -67,8 +67,20 @@
       </section>
 
       <section id="homePage" class="formstyling">
-        <h1 class="displayheading">WELCOME TO YOUR HOME PAGE</h1>
-        <p class="displayName" id="displayName">ERROR</p>
+        <h1 class="displayheading">
+          WELCOME TO YOUR TO-DO LIST <span id="displayName"> </span>
+        </h1>
+        <div class="todoList">
+          <div class="userInput">
+            <input
+              id="userTasksInput"
+              type="text"
+              placeholder="ADD YOUR TASKS HERE"
+            />
+            <button onclick="addTasks()" id="addTask">ADD TASK</button>
+          </div>
+          <ul id="todoItemsContainer"></ul>
+        </div>
         <button onclick="logOut()" class="buttonstyling">LOG OUT</button>
       </section>
     </div>

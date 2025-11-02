@@ -15,6 +15,7 @@ body {
 }
 
 .container {
+  height: 80%;
   width: 40%;
   background-color: white;
   display: flex;
@@ -82,8 +83,9 @@ body {
 }
 
 .formstyling .displayheading {
-  color: #999999;
-  font-size: 1vw;
+  color: #000000;
+  font-size: 2vw;
+  margin-bottom: 2vw;
 }
 
 .displayName {
@@ -92,6 +94,64 @@ body {
 
 .active {
   display: flex;
+}
+
+.todoList {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vw;
+  margin-bottom: 2vw;
+}
+
+.todoList ul {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1vw;
+  overflow: auto;
+}
+
+.todoList ul li {
+  background-color: rgb(243, 243, 243);
+  width: 90%;
+  list-style: none;
+  padding: 1vw;
+  border-radius: 30px;
+  text-align: start;
+}
+
+.todoList ul li input {
+  margin-right: 1vw;
+}
+
+.userInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1vw;
+}
+
+.userInput input {
+  width: 70%;
+  border-radius: 30px;
+  padding: 1vw;
+  border: none;
+  background-color: #f0efef;
+}
+
+.userInput button {
+  padding: 1vw;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-weight: bolder;
+  background: linear-gradient(to right, rgb(198, 198, 252), rgb(255, 189, 189));
 }
 
 @media (max-width: 1024px) {

@@ -4,6 +4,15 @@ const homePageDisplay = document.getElementById("homePage");
 let userData = JSON.parse(localStorage.getItem("userData"));
 let loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
 let displayName = document.getElementById("displayName");
+let userTasksInput = document.getElementById("userTasksInput");
+let todoItemsContainer = document.getElementById("todoItemsContainer");
+let userDetails = {
+  Name: "",
+  Email: "",
+  Number: "",
+  Password: "",
+  tasks: [],
+};
 
 userData == null ? (userData = []) : userData;
 
@@ -11,10 +20,24 @@ if (loggedInUser) {
   loginForm.classList.remove("active");
   signUpForm.classList.remove("active");
   homePageDisplay.classList.add("active");
-  displayName.innerText = loggedInUser.Name;
+  displayName.innerText = loggedInUser.Name.toUpperCase();
 } else {
   loginForm.classList.add("active");
   homePageDisplay.classList.remove("active");
+}
+
+function addTasks() {
+  if (userTasksInput.value) {
+    let tasks = document.createElement("li");
+    tasks.textContent = userTasksInput.value;
+    todoItemsContainer.appendChild(tasks);
+  } else {
+    alert(`please input tasks to Add in the list`);
+  }
+  userTasksInput.value = "";
+
+  userDetails.tasks.push(userTasksInput.value);
+  console.log(userDetails);
 }
 
 function logOut() {
@@ -29,11 +52,12 @@ function signUpInfo() {
   let userNumber = document.getElementById("userNumber");
   let userPassword = document.getElementById("userPassword");
 
-  let userDetails = {
+  userDetails = {
     Name: userName.value,
     Email: userEmail.value,
     Number: userNumber.value,
     Password: userPassword.value,
+    tasks: [],
   };
 
   if (
@@ -43,10 +67,10 @@ function signUpInfo() {
     userPassword.value == ""
   ) {
     alert(`the required details must be filled`);
-  } else {
-    userData.push(userDetails);
-    localStorage.setItem("userData", JSON.stringify(userData));
   }
+
+  userData.push(userDetails);
+  localStorage.setItem("userData", JSON.stringify(userData));
 
   if (
     userName.value != "" ||
@@ -69,6 +93,7 @@ function loginInfo() {
   let loginPassword = document.getElementById("loginPassword");
   let storedDate = JSON.parse(localStorage.getItem("userData"));
   let matched;
+  console.log(storedDate);
 
   if (loginEmail.value == "" || loginPassword.value == "") {
     alert("Please fill the required details");
@@ -87,7 +112,7 @@ function loginInfo() {
           localStorage.setItem("currentUser", JSON.stringify(found));
           loginForm.classList.remove("active");
           homePageDisplay.classList.add("active");
-          displayName.innerText = found.Name;
+          displayName.innerText = found.Name.toUpperCase();
           matched = true;
         }
       }
