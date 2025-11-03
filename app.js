@@ -6,13 +6,6 @@ let loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
 let displayName = document.getElementById("displayName");
 let userTasksInput = document.getElementById("userTasksInput");
 let todoItemsContainer = document.getElementById("todoItemsContainer");
-let userDetails = {
-  Name: "",
-  Email: "",
-  Number: "",
-  Password: "",
-  tasks: [],
-};
 
 userData == null ? (userData = []) : userData;
 
@@ -21,29 +14,70 @@ if (loggedInUser) {
   signUpForm.classList.remove("active");
   homePageDisplay.classList.add("active");
   displayName.innerText = loggedInUser.Name.toUpperCase();
+  autoLoadTasks()
 } else {
   loginForm.classList.add("active");
   homePageDisplay.classList.remove("active");
 }
 
+function autoLoadTasks(){
+  let ulTag = document.getElementById("todoItemsContainer");
+  let tasksDataToBeLoaded = JSON.parse(localStorage.getItem("currentUser"));
+  
+  if(tasksDataToBeLoaded.tasks.length > 0) {
+  for (let i = 0; i < tasksDataToBeLoaded.tasks.length; i++) {
+    let tasksTobeAdded = document.createElement("li")
+    let deletebtn = document.createElement("button")
+    deletebtn.textContent = "DELETE"
+    deletebtn.onclick = "deleteTasks()"
+    tasksTobeAdded.textContent = tasksDataToBeLoaded.tasks[i]
+    ulTag.appendChild(tasksTobeAdded)
+    tasksTobeAdded.appendChild(deletebtn)
+    
+  }
+  }
+
+  console.log(tasksDataToBeLoaded)
+}
+
 function addTasks() {
+
+  let dataForTasks = JSON.parse(localStorage.getItem("userData"));
+  let currentDataForTasks = JSON.parse(localStorage.getItem("currentUser"));
+
+
   if (userTasksInput.value) {
     let tasks = document.createElement("li");
     tasks.textContent = userTasksInput.value;
+    let deletebtn = document.createElement("button")
+    deletebtn.textContent = "DELETE"
+    deletebtn.onclick = "deleteTasks()"
+    tasks.appendChild(deletebtn)
     todoItemsContainer.appendChild(tasks);
   } else {
     alert(`please input tasks to Add in the list`);
   }
-  userTasksInput.value = "";
 
-  userDetails.tasks.push(userTasksInput.value);
-  console.log(userDetails);
+  for (let i = 0; i < dataForTasks.length; i++) {
+    if(dataForTasks[i].Email === currentDataForTasks.Email) {
+      dataForTasks[i].tasks.push(userTasksInput.value)
+      currentDataForTasks.tasks.push(userTasksInput.value)
+    } 
+    
+  }
+  localStorage.setItem("userData",JSON.stringify(dataForTasks))
+  localStorage.setItem("currentUser",JSON.stringify(currentDataForTasks))
+  
+  
+
+  userTasksInput.value = "";
 }
 
 function logOut() {
   localStorage.removeItem("currentUser");
   loginForm.classList.add("active");
   homePageDisplay.classList.remove("active");
+  todoItemsContainer.innerHTML= ""
 }
 
 function signUpInfo() {
@@ -51,7 +85,8 @@ function signUpInfo() {
   let userEmail = document.getElementById("userEmail");
   let userNumber = document.getElementById("userNumber");
   let userPassword = document.getElementById("userPassword");
-
+  let userDetails = {}
+  
   userDetails = {
     Name: userName.value,
     Email: userEmail.value,
@@ -124,6 +159,7 @@ function loginInfo() {
 
   loginEmail.value = "";
   loginPassword.value = "";
+  autoLoadTasks()
 }
 
 function forAnchorTagOfRegister() {
