@@ -22,6 +22,7 @@ if (loggedInUser) {
 
 function autoLoadTasks(){
   let ulTag = document.getElementById("todoItemsContainer");
+  let mainUserData = JSON.parse(localStorage.getItem("userData"));
   let tasksDataToBeLoaded = JSON.parse(localStorage.getItem("currentUser"));
   
   if(tasksDataToBeLoaded.tasks.length > 0) {
@@ -29,15 +30,29 @@ function autoLoadTasks(){
     let tasksTobeAdded = document.createElement("li")
     let deletebtn = document.createElement("button")
     deletebtn.textContent = "DELETE"
-    deletebtn.onclick = "deleteTasks()"
+    deletebtn.classList.add("deletebtn")
+    deletebtn.addEventListener('click', function(){
+      todoItemsContainer.removeChild(tasksTobeAdded)
+      let updatedTasks = tasksDataToBeLoaded.tasks.filter((_,index)=> index !== i)
+      tasksDataToBeLoaded.tasks = updatedTasks
+      console.log(updatedTasks)
+      localStorage.setItem("currentUser",JSON.stringify(tasksDataToBeLoaded))
+      for (let i = 0; i < mainUserData.length; i++) {
+        if(mainUserData[i].Email === tasksDataToBeLoaded.Email){
+          mainUserData[i].tasks = tasksDataToBeLoaded.tasks
+          console.log(mainUserData[i])
+        }
+        
+      }
+      localStorage.setItem("userData",JSON.stringify(mainUserData))
+  })
     tasksTobeAdded.textContent = tasksDataToBeLoaded.tasks[i]
     ulTag.appendChild(tasksTobeAdded)
     tasksTobeAdded.appendChild(deletebtn)
     
   }
   }
-
-  console.log(tasksDataToBeLoaded)
+  
 }
 
 function addTasks() {
@@ -46,18 +61,7 @@ function addTasks() {
   let currentDataForTasks = JSON.parse(localStorage.getItem("currentUser"));
 
 
-  if (userTasksInput.value) {
-    let tasks = document.createElement("li");
-    tasks.textContent = userTasksInput.value;
-    let deletebtn = document.createElement("button")
-    deletebtn.textContent = "DELETE"
-    deletebtn.onclick = "deleteTasks()"
-    tasks.appendChild(deletebtn)
-    todoItemsContainer.appendChild(tasks);
-  } else {
-    alert(`please input tasks to Add in the list`);
-  }
-
+  
   for (let i = 0; i < dataForTasks.length; i++) {
     if(dataForTasks[i].Email === currentDataForTasks.Email) {
       dataForTasks[i].tasks.push(userTasksInput.value)
@@ -67,6 +71,14 @@ function addTasks() {
   }
   localStorage.setItem("userData",JSON.stringify(dataForTasks))
   localStorage.setItem("currentUser",JSON.stringify(currentDataForTasks))
+  
+  if (userTasksInput.value) {
+    todoItemsContainer.innerHTML = ""
+    autoLoadTasks()
+  } else {
+    alert(`please input tasks to Add in the list`);
+  }
+
   
   
 
